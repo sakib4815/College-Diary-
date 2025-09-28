@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Model Polytechnic Institute 
+2025-2026</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+
+/* প্রথম অংশের স্টাইল */
+.scroll-text-container {
+  width: 100%; /* পুরো ওয়েব সাইটের বা অ্যাপের উইন্ডো অনুযায়ী */
+  overflow: hidden; /* আউটপুটে বাইরে গেলে দেখাবে না */
+  background-color: black; /* ব্যাকগ্রাউন্ড কালার, তুমি নিজের মতো পরিবর্তন করতে পারো */
+  padding: 10px 0; /* কিছু স্পেস দিতে পারো */
+  position: relative;
+}
+.scroll-text {
+  display: inline-block;
+  white-space: nowrap; /* এক লাইনে রাখতে পারে */
+  color: white; /* লেখার রঙ */
+  font-size: 20px; /* ফন্ট সাইজ - প্রয়োজন মত পরিবর্তন করো */
+  padding-left: 100%; /* প্রথমে পুরো স্পেস ফাঁকা হবে */
+  animation: moveRight 20s linear infinite; /* ডানদিকে ধীরে ধীরে ঘুরবে, 20 সেকেন্ডে একবার */
+}
+/* অ্যানিমেশন কীফ্রেম */
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* দ্বিতীয় অংশের স্টাইল */
+body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+.header-img { width: 100%; height: 200px; background-image: url('https://via.placeholder.com/800x200?text=Header+Image'); background-size: cover; margin-bottom: 20px; }
+h1 { text-align: center; }
+select, input[type=text], input[type=date], input[type=time], textarea { width: 100%; padding: 10px; margin-bottom: 10px; }
+button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+#subjectOptions { display: flex; flex-wrap: wrap; gap: 10px; }
+#subjectOptions label { background: #ddd; padding: 10px; border-radius: 5px; cursor: pointer; }
+#diaryEntries { margin-top: 30px; }
+.entry { background: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<!-- অ্যাপের উপরে সুন্দর ছবি যোগ করলাম -->
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrlfI56ikPv7ajs0bczP9iaaDg_RygcuM4g7LSLVsmOBb71f7A-Ph-HRo&s=10" alt="আকৃষ্ট ছবি" width="320" style="display:block; margin:auto; margin-bottom:10px; border-radius:10px;"/>
+
+<!-- প্রথম অংশ: স্ক্রলিং টেক্সট -->
+<div class="scroll-text-container">
+  <div class="scroll-text">
+    মডেল পলিটেকনিক ইনস্টিটিউট (MPI)
+  </div>
+</div>
+
+<!-- নিচের ছবি, নিচে থাকা ছবি -->
+<img src="https://res.cloudinary.com/dlklqihg6/image/upload/v1758699123/unezrsed4b4thvj8v2ji.jpg" alt="ছবি" width="320" style="display:block; margin:auto; margin-top:10px; margin-bottom:10px;"/>
+
+<style>
+    body {
+      font-family: Kalpurush, Arial;
+      text-align: center;
+      padding: 10px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    th, td {
+      border:.20px solid #100;
+      padding: 6px;
+      width: 6px;
+      height: 6px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .today {
+      background-color: #fff89e; /* আজকের দিন হলুদ */
+      font-weight: bold;
+    }
+
+    .weekend {
+      background-color: #ffcccc; /* শুক্রবার, শনিবার */
+    }
+
+    .holiday {
+      background-color: #ff9999; /* ছুটির দিন */
+    }
+  </style>
+</head>
+<body>
+  <h1 id="month-year">মাস ও সাল</h1>
+  <table id="calendar"></table>
+
+  <script>
+    const monthNames = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+    const days = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহস্পতি", "শুক্র", "শনি"];
+
+    // সহকারী ছুটির দিনের লিস্ট (তারিখ, মাস)
+    const holidays = [
+      { day: 21, month: 1 },  // শহীদ দিবস
+      { day: 26, month: 2 },  // স্বাধীনতা দিবস
+      { day: 14, month: 3 },  // পহেলা বৈশাখ
+      { day: 10, month: 4 },  // ঈদ (উদাহরণ)
+      { day: 11, month: 4 },  // ঈদ পরবর্তী দিন
+      { day: 15, month: 9 }   // অন্য যেকোনো ছুটি
+    ];
+
+    function isHoliday(day, month) {
+      return holidays.some(h => h.day === day && h.month === month);
+    }
+
+    function generateCalendar(year, month) {
+      const calendar = document.getElementById("calendar");
+      calendar.innerHTML = "";
+
+      const monthYearTitle = document.getElementById("month-year");
+      monthYearTitle.innerText = `${monthNames[month]} ${year}`;
+
+      // Header row
+      const headerRow = document.createElement("tr");
+      for (let d of days) {
+        const th = document.createElement("th");
+        th.innerText = d;
+        headerRow.appendChild(th);
+      }
+      calendar.appendChild(headerRow);
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      let date = 1;
+
+      for (let i = 0; i < 6; i++) {
+        const row = document.createElement("tr");
+
+        for (let j = 0; j < 7; j++) {
+          const cell = document.createElement("td");
+
+          if (i === 0 && j < firstDay) {
+            cell.innerText = "";
+          } else if (date > daysInMonth) {
+            break;
+          } else {
+            cell.innerText = date;
+
+            const today = new Date();
+            const isToday = date === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+
+            if (j === 5 || j === 6) {
+              // শুক্রবার (5) বা শনিবার (6)
+              cell.classList.add("weekend");
+            }
+
+            if (isHoliday(date, month)) {
+              cell.classList.add("holiday");
+            }
+
+            if (isToday) {
+              cell.classList.add("today");
+            }
+
+            date++;
+          }
+
+          row.appendChild(cell);
+        }
+
+        calendar.appendChild(row);
+        if (date > daysInMonth) break;
+      }
+    }
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+
+    generateCalendar(year, month);
+  </script>
+
+<h1>কলেজ ডায়েরি</h1>
+
+<h3>বিষয় সিলেক্ট করুন:</h3>
+<div id="subjectOptions">
+  <label><input type="radio" name="subject" value="বাংলা"> বাংলা</label>
+  <label><input type="radio" name="subject" value="ইংরেজি"> ইংরেজি</label>
+  <label><input type="radio" name="subject" value="পদার্থ বিজ্ঞান"> পদার্থ বিজ্ঞান</label>
+  <label><input type="radio" name="subject" value="গণিত"> গণিত</label>
+  <label><input type="radio" name="subject" value="বেসিক ইলেকট্রিসিটি "> বেসিক ইলেকট্রিসিটি </label>
+  <label><input type="radio" name="subject" value="ইঞ্জিনিয়ারিং ড্রয়িং"> ইঞ্জিনিয়ারিং ড্রয়িং </label>
+  <label><input type="radio" name="subject" value="কম্পিউটার অফিস অ্যপ্লিকেশন "> কম্পিউটার অফিস অ্যপ্লিকেশন </label>
+</div>
+
+<h3>পড়া ও লেখা:</h3>
+<textarea id="noteText" rows="4" placeholder="পড়াশোনা বা নোট লিখুন..."></textarea>
+
+<h3> পড়াশোনা ছবি যোগ করুন:</h3>
+<input type="file" id="imageUpload" accept="image/*" />
+
+<form id="entryForm">
+  <input type="hidden" id="hiddenImage" />
+  <label>তারিখ: <input type="date" id="entryDate" required></label><br>
+  <label>সময়: <input type="time" id="entryTime" required></label><br>
+  <button type="submit">SUBMIT</button>
+</form>
+
+<h3>পড়াশোনা তথ্য খুঁজুন:</h3>
+<input type="date" id="searchDate" placeholder="তারিখ দিন" />
+<button onclick="showEntries()">খুঁজে দেখুন</button>
+
+<div id="diaryEntries"></div>
+
+<h3>অপ্রয়োজনীয় সেভ তথ্য ডিলেট করুন:</h3>
+<input type="number" id="deleteID" placeholder="ইনপুট করুন সেভ আইডি" />
+<button onclick="deleteEntry()">ডিলেট</button>
+
+<!-- লুকানো ডেটা যেখানে অটোমেটিক থাকবে -->
+<div id="savedData" style="display:none;"></div>
+
+<script>
+let entries = [];
+
+window.onload = () => {
+  loadData();
+  autoSetDateTime();
+
+  // প্রথম বিষয়টি স্বয়ংক্রিয়ভাবে নির্বাচন
+  const subjects = document.querySelectorAll('#subjectOptions input[type=radio]');
+  if (subjects.length > 0) {
+    subjects[0].checked = true;
+  }
+};
+
+// ডেটা লোড করে প্রয়োজনে
+function loadData() {
+  const data = localStorage.getItem('diaryEntries');
+  if (data) {
+    entries = JSON.parse(data);
+  }
+}
+
+// ডেটা সেভ করে রাখা
+function saveData() {
+  localStorage.setItem('diaryEntries', JSON.stringify(entries));
+}
+
+// অটো চেক-ইন সেট
+function autoSetDateTime() {
+  const today = new Date();
+  document.getElementById('entryDate').value = today.toISOString().substr(0, 10);
+  document.getElementById('entryTime').value = today.toTimeString().substr(0, 5);
+}
+
+// ফর্ম সাবমিট ইভেন্ট
+document.getElementById('entryForm').addEventListener('submit', function(e) {
+  const selectedSubject = document.querySelector('#subjectOptions input[type=radio]:checked');
+  if (!selectedSubject) {
+    alert('অনুগ্রহ করে একটি সঠিক বিষয় নির্বাচন করুন।');
+    e.preventDefault();
+    return;
+  }
+  saveEntry();
+});
+
+function saveEntry() {
+  const date = document.getElementById('entryDate').value;
+  const time = document.getElementById('entryTime').value;
+  const note = document.getElementById('noteText').value;
+  const selectedSubjectInput = document.querySelector('#subjectOptions input[type=radio]:checked');
+  const subjects = selectedSubjectInput ? [selectedSubjectInput.value] : [];
+
+  const imageFile = document.getElementById('imageUpload').files[0];
+  if (imageFile) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imageData = e.target.result;
+      const id = Date.now();
+      entries.push({ id, date, time, note, subjects, imageData });
+      saveData();
+      displayEntries();
+      alert('পড়া সেভ হয়েছে!');
+      document.getElementById('noteText').value = '';
+      document.getElementById('imageUpload').value = '';
+    };
+    reader.readAsDataURL(imageFile);
+  } else {
+    const id = Date.now();
+    entries.push({ id, date, time, note, subjects, imageData: null });
+    saveData();
+    displayEntries();
+    alert('পড়া সেভ হয়েছে!');
+    document.getElementById('noteText').value = '';
+  }
+}
+
+// শুধু ডেটা দেখানোর জন্য, যেখানে দরকার সেখানে ডেটা দেখানো
+function displayEntries() {
+  // আপনি চাইলে এই ফাংশনে ডেটা দেখানোর কোড যোগ করবেন
+  // এখন শুধু ডেটা লোড
+}
+
+// তালিকা দেখানোর ফাংশন
+function showEntries() {
+  const dateToSearch = document.getElementById('searchDate').value;
+  const filtered = dateToSearch ? entries.filter(e => e.date === dateToSearch) : entries;
+  const container = document.getElementById('diaryEntries');
+  container.innerHTML = '';
+
+  filtered.forEach(entry => {
+    const div = document.createElement('div');
+    div.className = 'entry';
+    div.innerHTML = `
+      <strong>আইডি:</strong> ${entry.id}<br>
+      <strong>তারিখ:</strong> ${entry.date}<br>
+      <strong>সময়:</strong> ${entry.time}<br>
+      <strong>বিষয়:</strong> ${entry.subjects.join(', ')}<br>
+      <strong>নোট:</strong> ${entry.note}<br>
+      ${entry.imageData ? `<img src="${entry.imageData}" width="100" />` : ''}
+    `;
+    container.appendChild(div);
+  });
+}
+
+// এন্ট্রি ডিলেট
+function deleteEntry() {
+  const idToDelete = parseInt(document.getElementById('deleteID').value, 10);
+  if (isNaN(idToDelete)) {
+    alert('সঠিক আইডি ইনপুট করুন।');
+    return;
+  }
+  entries = entries.filter(e => e.id !== idToDelete);
+  saveData();
+  showEntries();
+  alert('সেভ তথ্য ডিলেট হয়েছে।');
+}
+</script>
+
+</body>
+</html>
